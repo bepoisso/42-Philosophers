@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:56:57 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/24 19:20:57 by bepoisso         ###   ########.fr       */
+/*   Created: 2025/01/24 18:38:31 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/01/24 19:20:17 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	philo(t_data **data)
+int main(int ac, char **av)
 {
-	t_philo	*philo;
-	t_fork	*fork;
+	t_data	*data;
 
-	philo = memset(philo, 0, sizeof(t_philo));
-	fork = memset(fork, 0, sizeof(t_fork));
-	init_all(data, &philo, &fork);
+	data = memset(data, 0, sizeof(t_data));
+	if (ac < 5 || ac > 6)
+		// Error nbr args
+	parser(&data, ac, av);
+	philo(&data);
+	return 0;
 }

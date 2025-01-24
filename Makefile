@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/01/23 19:18:56 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/01/24 19:26:09 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,12 @@ OBJ_DIR = ./objs
 INC_DIR = ./includes
 
 SRC_FILES = \
-			philo.c\
+			main.c\
+			utils.c\
 			parser.c\
+			philo.c\
+			init.c\
+			manip.c\
 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
