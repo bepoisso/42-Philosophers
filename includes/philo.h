@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/24 19:10:48 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:09:19 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,33 @@ struct s_data
 // STATE
 enum e_state
 {
-	dead,
+	nothing,
 	eat,
 	is_sleep,
 	think,
+	dead,
 };
 
 //	_______________________FUNCTIONS_______________________
 
+// PHILO
+void	philo(t_data *data);
+
 // PARSER
-void	parser(t_data **data, int ac, char **av);
+void	parser(t_data *data, int ac, char **av);
 
 // UTILES
 int		ft_atoi(const char *nptr);
 void	ft_perror(char *s);
+void	free_philo(t_philo **philo);
+void	free_fork(t_fork *fork, int nbr);
+
+// MANIPULATION
+t_philo	*ft_lstnew(int content, t_data *data, t_fork *fork);
+void	ft_lstadd_back(t_philo **lst, t_philo *new);
+t_philo	*ft_lstlast(t_philo *lst);
+int		ft_lstsize(t_philo *lst);
+
+// INTI
+t_fork	*init_fork(t_data *data);
+t_philo	*init_philo(t_data *data, t_fork *fork);

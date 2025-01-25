@@ -6,21 +6,26 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:26:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/24 21:36:32 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:14:08 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-t_philo	*ft_lstnew(void *content)
+t_philo	*ft_lstnew(int content, t_data *data, t_fork *fork)
 {
 	t_philo	*new;
 
 	new = malloc(sizeof(t_philo));
 	if (!new)
 		return (NULL);
-	new->data = content;
+	memset(new, 0, sizeof(t_philo));
+	new->id = content;
+	new->state = nothing;
 	new->next = NULL;
+	new->data = data;
+	new->right_fork = &fork[content];
+	new->left_fork = &fork[(content - 1 + data->philo_nbr) % data->philo_nbr];
 	return (new);
 }
 
@@ -37,6 +42,7 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 	}
 	last = ft_lstlast(*lst);
 	last->next = new;
+	new->prev = last;
 }
 
 t_philo	*ft_lstlast(t_philo *lst)
@@ -65,18 +71,4 @@ int	ft_lstsize(t_philo *lst)
 		i++;
 	}
 	return (i);
-}
-
-void	ft_lstiter(t_philo *lst, void (*f)(void *))
-{
-	t_philo	*current;
-
-	if (!lst || !f)
-		return ;
-	current = lst;
-	while (current)
-	{
-		f(current->content);
-		current = current->next;
-	}
 }

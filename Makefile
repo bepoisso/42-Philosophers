@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/01/24 19:26:09 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/01/25 16:33:28 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ RESET = \033[0m
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
-ARGS = 
-VALARGS = --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --trace-children=yes
+ARGS = 3 300 200 200
+VALARGS = --leak-check=full --track-origins=yes --show-leak-kinds=all #--trace-children=yes --track-fds=yes
 MAKEFLAGS += --no-print-directory
 
 #_________________FILES_________________
@@ -38,6 +38,7 @@ SRC_FILES = \
 			philo.c\
 			init.c\
 			manip.c\
+			simulation.c\
 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
@@ -48,7 +49,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 		@echo "Create Program		✅"
 
 

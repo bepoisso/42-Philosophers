@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/24 19:08:11 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:14:43 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,31 @@ int	ft_atoi(const char *nptr)
 void	ft_perror(char *s)
 {
 	write(1, s, sizeof(s));
+	exit (1);
+}
+
+void	free_philo(t_philo **philo)
+{
+	t_philo	*temp;
+
+	if (!philo || !*philo)
+		return ;
+	(*philo)->prev->next = NULL;
+	while (*philo)
+	{
+		temp = (*philo)->next;
+		free(*philo);
+		*philo = temp;
+	}
+	*philo = NULL;
+}
+
+void	free_fork(t_fork *fork, int nbr)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nbr)
+		pthread_mutex_destroy(&fork[i].fork);
+	free(fork);
 }
