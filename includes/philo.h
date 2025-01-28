@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/25 16:09:19 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:59:52 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ struct s_data
 // STATE
 enum e_state
 {
-	nothing,
-	eat,
-	is_sleep,
-	think,
+	thinking,
+	eating,
+	sleeping,
 	dead,
 };
 

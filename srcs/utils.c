@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/25 16:14:43 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:40:15 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,12 @@ void	free_fork(t_fork *fork, int nbr)
 	while (++i < nbr)
 		pthread_mutex_destroy(&fork[i].fork);
 	free(fork);
+}
+
+int	ft_get_time()
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }

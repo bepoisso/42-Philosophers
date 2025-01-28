@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:26:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/25 15:14:08 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:09:54 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_philo	*ft_lstnew(int content, t_data *data, t_fork *fork)
 		return (NULL);
 	memset(new, 0, sizeof(t_philo));
 	new->id = content;
-	new->state = nothing;
+	new->state = thinking;
 	new->next = NULL;
 	new->data = data;
-	new->right_fork = &fork[content];
-	new->left_fork = &fork[(content - 1 + data->philo_nbr) % data->philo_nbr];
+	new->right_fork = &fork[(content - 1 + data->philo_nbr) % data->philo_nbr];
+	new->left_fork = &fork[content];
 	return (new);
 }
 
