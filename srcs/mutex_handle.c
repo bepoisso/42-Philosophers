@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:23:58 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:24:27 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:57:37 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	mutex_error(int status, t_mutex_code code)
 
 void	mutex(t_mutex *mutex, t_mutex_code code)
 {
-	if (code = init)
+	if (code == init)
 		mutex_error(pthread_mutex_init(mutex, NULL), code);
-	else if (code = lock)
+	else if (code == lock)
 		mutex_error(pthread_mutex_lock(mutex), code);
-	else if (code = unlock)
+	else if (code == unlock)
 		mutex_error(pthread_mutex_unlock(mutex), code);
-	else if (code = destroy)
+	else if (code == destroy)
 		mutex_error(pthread_mutex_destroy(mutex), code);
 	else
 		ft_perror("Erorr\nWrong mutex_code\n");

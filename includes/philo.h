@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:43:06 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:53:38 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int					ft_lstsize(t_philo *lst);
 // INTI
 t_fork				*init_fork(t_data *data);
 t_philo				*init_philo(t_data *data, t_fork *fork);
-void				init_data(t_data *data, t_philo *philo, t_fork *fork);
+void				init_data(t_data *data);
 
 // SIMULATION
 void				*philo_routine(void *var);

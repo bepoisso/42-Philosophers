@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:25:19 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:39:08 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:58:40 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	thread_error(int status, t_thread_code code)
 
 void	thread(pthread_t *thread, void *(*func)(void *), void *data, t_thread_code code)
 {
-	if (code = create)
+	if (code == create)
 		thread_error(pthread_create(thread, NULL, func, data), code);
-	else if (code = join)
-		thread_error(pthread_join(thread, NULL), code);
-	else if (code = detach)
-		thread_error(pthread_detach(thread), code);
+	else if (code == join)
+		thread_error(pthread_join(*thread, NULL), code);
+	else if (code == detach)
+		thread_error(pthread_detach(*thread), code);
 	else
 		ft_perror("Erorr Thread\nWrong thread_code\n");
 }

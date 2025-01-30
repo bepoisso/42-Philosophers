@@ -6,11 +6,16 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:40:37 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:53:04 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	init_data(t_data *data)
+{
+	data->end = false;
+}
 
 t_philo	*init_philo(t_data *data, t_fork *fork)
 {
@@ -50,11 +55,4 @@ t_fork	*init_fork(t_data *data)
 	}
 	fork[i].id = -1;
 	return (fork);
-}
-
-void	init_data(t_data *data, t_philo *philo, t_fork *fork)
-{
-	data->end = false;
-	data->philos = philo;
-	data->forks = fork;
 }

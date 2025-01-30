@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:23:55 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:54:08 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,6 @@ void	free_philo(t_philo **philo)
 		*philo = temp;
 	}
 	*philo = NULL;
-}
-
-void	free_fork(t_fork *fork, int nbr)
-{
-	int	i;
-
-	i = -1;
-	while (++i < nbr)
-		pthread_mutex_destroy(&fork[i].fork);
-	free(fork);
 }
 
 long long	ft_get_time(void)

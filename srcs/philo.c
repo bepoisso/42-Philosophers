@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:57 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 13:44:19 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:54:32 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	philo(t_data *data)
 {
-	t_philo	*philo;
-	t_fork	*fork;
-
-	fork = init_fork(data);
-	philo = init_philo(data, fork);
-	inti_data(data, philo, fork);
-	simulation(data, philo);
-	free_philo(&philo);
-	free_fork(fork, data->philo_nbr);
+	init_data(data);
+	data->forks = init_fork(data);
+	data->philos = init_philo(data, data->forks);
+	simulation(data, data->philos);
+	// free_philo(&data->philos);
+	// clean_fork(fork);
 }

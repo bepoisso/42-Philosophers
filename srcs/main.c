@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:38:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/25 15:25:26 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:49:50 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int main(int ac, char **av)
 
 	memset(&data, 0, sizeof(t_data));
 	if (ac < 5 || ac > 6)
-		return (ft_perror("Error\n Nbr args\n"), 1); // A changer par un ft_perror
+		ft_perror("Error\nNbr args\n");
 	parser(&data, ac, av);
-	philo(&data);
+	// philo(&data);
+	// clean(&data);
 	return 0;
 }
