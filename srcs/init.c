@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 13:45:43 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:40:37 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,17 @@ t_fork	*init_fork(t_data *data)
 	t_fork	*fork;
 	int		i;
 
-	fork = (t_fork *)malloc(sizeof(t_fork) * data->philo_nbr);
+	fork = (t_fork *)malloc(sizeof(t_fork) * (data->philo_nbr + 1));
 	if (!fork)
 		return (NULL);
 	i = 0;
 	while (i < data->philo_nbr)
 	{
 		fork[i].id = i;
-		if (pthread_mutex_init(&fork[i].fork, NULL) != 0) // Init mutex if ERROR ...
-		{
-			while (--i >= 0)
-				pthread_mutex_destroy(&fork[i].fork);
-			free(fork);
-			ft_perror("Error\nInitialisation mutex");
-		}
+		mutex(&fork[i].fork, init);
 		i++;
 	}
+	fork[i].id = -1;
 	return (fork);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 13:45:07 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:43:06 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <pthread.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <errno.h>
 
 // _______________________STRUCT & VARIABLE_______________________
 
@@ -73,6 +74,23 @@ enum e_state
 	dead,
 };
 
+// mutex_CODE
+typedef	enum e_mutex_code
+{
+	init,
+	destroy,
+	lock,
+	unlock,
+}	t_mutex_code;
+
+// THREAD CODE
+typedef enum e_thread_code
+{
+	create,
+	join,
+	detach,
+}	t_thread_code;
+
 //	_______________________FUNCTIONS_______________________
 
 // PHILO
@@ -103,3 +121,7 @@ void				init_data(t_data *data, t_philo *philo, t_fork *fork);
 // SIMULATION
 void				*philo_routine(void *var);
 void				simulation(t_data *data, t_philo *philo);
+
+// MUTEX & THREAD HANDLE
+void				mutex(t_mutex *mutex, t_mutex_code code);
+void				thread(pthread_t *thread, void *(*func)(void *), void *data, t_thread_code code);
