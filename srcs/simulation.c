@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:45:03 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:48:20 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	simulation(t_data *data, t_philo *philo)
 	}
 	current = philo;
 	thread(&monitoring, dead_monitoring, (void *)philo, create);
-	thread(monitoring, join);
-	thread(current->thread_id, join);
+	thread(monitoring, NULL, NULL, join);
+	thread(current->thread_id, NULL, NULL, join);
 	current = current->next;
 	while (current != philo)
 	{
-		thread(current->thread_id, join);
+		thread(current->thread_id, NULL, NULL, join);
 		current = current->next;
 	}
 }
