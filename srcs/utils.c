@@ -6,42 +6,34 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/28 16:50:40 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:32:54 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_atoi(const char *nptr)
+unsigned long long	ft_atoll(const char *nptr)
 {
-	int	result;
-	int	neg;
-	int	i;
+	unsigned long long	result;
+	int					i;
 
-	neg = 0;
 	result = 0;
 	i = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			neg = 1;
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = (result * 10) + (nptr[i] - '0');
 		i++;
 	}
-	if (neg)
-		return (-result);
 	return (result);
 }
 
 void	ft_perror(char *s)
 {
-	write(1, s, sizeof(s));
+	while (*s)
+	{
+		write(1, s, 1);
+		s++;
+	}
 	exit (1);
 }
 
@@ -77,4 +69,22 @@ long long	ft_get_time(void)
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int is_not_correct(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (1);
+		i++;
+	}
+	if (ft_atoll(s) > INT_MAX || ft_atoll(s) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
