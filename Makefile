@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/01/25 16:33:28 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/01/30 14:23:46 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ SRC_FILES = \
 			init.c\
 			manip.c\
 			simulation.c\
+			clean.c\
+			mutex_handle.c\
+			thread_handle.c\
 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
