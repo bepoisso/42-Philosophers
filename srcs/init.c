@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:31:01 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:45:43 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ t_fork	*init_fork(t_data *data)
 		i++;
 	}
 	return (fork);
+}
+
+void	init_data(t_data *data, t_philo *philo, t_fork *fork)
+{
+	data->end = false;
+	data->philos = philo;
+	data->forks = fork;
 }

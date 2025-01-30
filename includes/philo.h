@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:00:36 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:45:07 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,24 @@ void		philo(t_data *data);
 void		parser(t_data *data, int ac, char **av);
 
 // UTILES
-int			ft_atoi(const char *nptr);
-void		ft_perror(char *s);
-void		free_philo(t_philo **philo);
-void		free_fork(t_fork *fork, int nbr);
-long long	ft_get_time(void);
+unsigned long long	ft_atoll(const char *nptr);
+void				ft_perror(char *s);
+void				free_philo(t_philo **philo);
+void				free_fork(t_fork *fork, int nbr);
+long long			ft_get_time(void);
+int					is_not_correct(char *s);
 
 // MANIPULATION
-t_philo		*ft_lstnew(int content, t_data *data, t_fork *fork);
-void		ft_lstadd_back(t_philo **lst, t_philo *new);
-t_philo		*ft_lstlast(t_philo *lst);
-int			ft_lstsize(t_philo *lst);
+t_philo				*ft_lstnew(int content, t_data *data, t_fork *fork);
+void				ft_lstadd_back(t_philo **lst, t_philo *new);
+t_philo				*ft_lstlast(t_philo *lst);
+int					ft_lstsize(t_philo *lst);
 
 // INTI
-t_fork		*init_fork(t_data *data);
-t_philo		*init_philo(t_data *data, t_fork *fork);
+t_fork				*init_fork(t_data *data);
+t_philo				*init_philo(t_data *data, t_fork *fork);
+void				init_data(t_data *data, t_philo *philo, t_fork *fork);
 
 // SIMULATION
-void		*philo_routine(void *var);
-void		simulation(t_data *data, t_philo *philo);
+void				*philo_routine(void *var);
+void				simulation(t_data *data, t_philo *philo);
