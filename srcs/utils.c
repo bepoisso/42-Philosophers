@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 16:01:30 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:03:56 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,11 @@ int is_not_correct(char *s)
 		return (1);
 	}
 	return (0);
+}
+
+void	ft_print(char *s, t_philo *philo)
+{
+	mutex(&philo->data->write, lock);
+	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id, s);
+	mutex(&philo->data->write, unlock);
 }

@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 13:35:36 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:06:47 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <errno.h>
+
+# define RED     "\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define YELLOW  "\x1b[33m"
+# define BLUE    "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define RESET   "\x1b[0m" 
 
 // _______________________STRUCT & VARIABLE_______________________
 
@@ -64,6 +71,7 @@ struct s_data
 	t_mutex		write;
 	t_mutex		meals;
 	t_mutex		dead;
+	t_mutex		finish;
 	t_fork		*forks;
 	t_philo		*philos;
 };
@@ -109,6 +117,7 @@ void				free_philo(t_philo **philo);
 void				free_fork(t_fork *fork, int nbr);
 long long			ft_get_time(void);
 int					is_not_correct(char *s);
+void				ft_print(char *s, t_philo *philo);
 
 // MANIPULATION
 t_philo				*ft_lstnew(int content, t_data *data, t_fork *fork);

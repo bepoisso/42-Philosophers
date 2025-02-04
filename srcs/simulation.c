@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 13:21:04 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:07:01 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	philo_eat(t_philo *philo)
 	mutex(&philo->right_fork->fork, lock);
 	if (philo->data->end == true)
 		return ;
-	printf("\033[33m%lld %d  has taken a fork\033[0m\n", (ft_get_time() - philo->data->start_time), philo->id);
+	ft_print("\33[33m has taken a fork/033[0m")
 	mutex(&philo->left_fork->fork, lock);
 	if (philo->data->end == true)
 		return ;
@@ -81,8 +81,9 @@ void	*dead_monitoring(void *var)
 	{
 		if ((ft_get_time() - philo->data->start_time) - philo->last_meal_time >= philo->data->time_to_die)
 		{
-			// printf("MONITORING ** philo %d is dead %lld > %lld !!\n", philo->id, ((ft_get_time() - philo->data->start_time) - philo->last_meal_time), philo->data->time_to_die);
+			mutex(&philo->data->finish, lock);
 			philo->data->end = true;
+			mutex(&philo->data->finish, unlock);
 			philo_dead(philo);
 			break ;
 		}
@@ -116,7 +117,11 @@ void	*meals_monitoring(void *var)
 		current = current->next;
 	}
 	if (check == true)
+	{
+		mutex(&philo->data->finish, lock);
 		philo->data->end = true;
+		mutex(&philo->data->finish, unlock);
+	}
 	return (NULL);
 }
 
