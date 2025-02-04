@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 10:46:11 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:21:04 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	*philo_routine(void *var)
 			philo_eat(philo);
 		if (philo->data->end == false)
 			philo_sleep(philo);
-		if (philo->data->end == false)
-			philo_dead(philo);
 	}
 	return (NULL);
 }
@@ -86,7 +84,7 @@ void	*dead_monitoring(void *var)
 			// printf("MONITORING ** philo %d is dead %lld > %lld !!\n", philo->id, ((ft_get_time() - philo->data->start_time) - philo->last_meal_time), philo->data->time_to_die);
 			philo->data->end = true;
 			philo_dead(philo);
-			break;
+			break ;
 		}
 		philo = philo->next;
 	}
@@ -117,6 +115,8 @@ void	*meals_monitoring(void *var)
 		}
 		current = current->next;
 	}
+	if (check == true)
+		philo->data->end = true;
 	return (NULL);
 }
 
@@ -137,9 +137,8 @@ void	simulation(t_data *data, t_philo *philo)
 	}
 	current = philo;
 	thread(&dead, dead_monitoring, (void *)philo, create);
-	thread(&meals, meals_monitoring, (void *)philo, create);
-	thread(&dead, NULL, NULL, join);
-	thread(&meals, NULL, NULL, join);
+	if (data->max_meals != -1)
+		thread(&meals, meals_monitoring, (void *)philo, create);
 	thread(&current->thread_id, NULL, NULL, join);
 	current = current->next;
 	while (current != philo)

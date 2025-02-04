@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:53:38 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:35:36 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ struct s_data
 	long long	max_meals;
 	long long	start_time;
 	bool		end;
+	t_mutex		write;
+	t_mutex		meals;
+	t_mutex		dead;
 	t_fork		*forks;
 	t_philo		*philos;
 };

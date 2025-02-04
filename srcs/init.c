@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:53:04 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:39:44 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void	init_data(t_data *data)
 {
 	data->end = false;
+	mutex(&data->write, init);
+	mutex(&data->dead, init);
+	mutex(&data->meals, init);
 }
 
 t_philo	*init_philo(t_data *data, t_fork *fork)
