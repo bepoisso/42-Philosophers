@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 14:06:47 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:32:59 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 #include <stdbool.h>
 #include <errno.h>
 
-# define RED     "\x1b[31m"
-# define GREEN   "\x1b[32m"
-# define YELLOW  "\x1b[33m"
-# define BLUE    "\x1b[34m"
-# define MAGENTA "\x1b[35m"
-# define RESET   "\x1b[0m" 
+# define RED "\x1b[31m"
+# define GRE "\x1b[32m"
+# define YEL "\x1b[33m"
+# define BLU "\x1b[34m"
+# define MAG "\x1b[35m"
+# define RES "\x1b[0m" 
 
 // _______________________STRUCT & VARIABLE_______________________
 
@@ -51,6 +51,7 @@ typedef struct s_philo
 	int					meal_count;
 	bool				full;
 	long				last_meal_time;
+	bool				even;
 	t_fork				*left_fork;
 	t_fork				*right_fork;
 	struct s_philo		*next;
