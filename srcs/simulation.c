@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 17:47:52 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:01:14 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,19 @@ void	philo_eat(t_philo *philo)
 	mutex(&philo->meals, unlock);
 	ft_print(YEL"is eating"RES, philo);
 	philo->state = eating;
-	ft_sleep(philo->data->time_to_eat * 1000);
+	usleep(philo->data->time_to_eat * 1000);
 	mutex(&philo->meals, lock);
-	philo->meal_count++;
-	philo->last_meal_time = ft_get_time();
-	mutex(&philo->data->meals, lock);
-	if (philo->meal_count == philo->data->max_meals)
-		philo->data->nbr_meals++;
+	philo->last_meal_time = ft_get_time() - philo->data->start_time;
 	mutex(&philo->meals, unlock);
-	mutex(&philo->data->meals, unlock);
+	mutex(&philo->right_fork->fork, unlock);
+	mutex(&philo->left_fork->fork, unlock);
+	philo->meal_count++;
+	if (philo->meal_count == philo->data->max_meals)
+	{
+		mutex(&philo->data->meals, lock);
+		philo->data->nbr_meals++;
+		mutex(&philo->data->meals, unlock);
+	}
 }
 
 void	philo_dead(t_philo *philo)
@@ -88,11 +92,13 @@ void	*philo_routine(void *var)
 		philo_think(philo);
 	while (1)
 	{
-		if (is_ended(philo->data))
-			return (NULL);
-		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
+		if (philo->data->end == false)
+			philo_eat(philo);
+		if (philo)
+		if (philo->data->end == false)
+			philo_sleep(philo);
+		if (philo->data->end == false)
+			philo_think(philo);
 	}
 }
 
@@ -104,21 +110,24 @@ void	*monitoring(void *var)
 	philo->prev->next = philo;
 	while (1)
 	{
-		if (is_ended(philo->data))
-			return (NULL);
-		if (check_dead(philo))
+		if ((ft_get_time() - philo->data->start_time) - philo->last_meal_time > philo->data->time_to_die)
 		{
 			philo_dead(philo);
 			mutex(&philo->data->finish, lock);
 			philo->data->end = true;
 			mutex(&philo->data->finish, unlock);
+			break ;
 		}
-		if (philo->data->max_meals != -1 && check_meals(philo))
+		mutex(&philo->data->meals, lock);
+		if (philo->data->nbr_meals >= philo->data->philo_nbr)
 		{
 			mutex(&philo->data->finish, lock);
 			philo->data->end = true;
 			mutex(&philo->data->finish, unlock);
+			mutex(&philo->data->meals, unlock);
+			break ;
 		}
+		mutex(&philo->data->meals, unlock);
 		philo = philo->next;
 	}
 	return (NULL);
@@ -133,10 +142,10 @@ void	simulation(t_data *data, t_philo *philo)
 	// philo->prev->next = NULL;
 	current = philo;
 	data->start_time = ft_get_time();
-	thread(&mon, monitoring, philo, create);
-	// current->prev->next = NULL;
-	//printf("%p", current->prev->next);
-	while (current)
+	thread(&mon, monitoring, (void *)philo, create);
+	thread(&current->thread_id, philo_routine, (void *)current, create);
+	current = current->next;
+	while (current != philo)
 	{
 		//printf("%d\n", current->id);
 		thread(&current->thread_id, philo_routine, current, create);
@@ -144,9 +153,10 @@ void	simulation(t_data *data, t_philo *philo)
 		i++;
 	}
 	current = philo;
-	// philo->prev->next = NULL;
 	thread(&mon, NULL, NULL, join);
-	while (current)
+	thread(&current->thread_id, NULL, NULL, join);
+	current = current->next;
+	while (current != philo)
 	{
 		thread(&current->thread_id, NULL, NULL, join);
 		current = current->next;
