@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:20 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 07:48:29 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,6 @@ void	ft_perror(char *s)
 		s++;
 	}
 	exit (1);
-}
-
-void	free_philo(t_philo **philo)
-{
-	t_philo	*temp;
-
-	if (!philo || !*philo)
-		return ;
-	(*philo)->prev->next = NULL;
-	while (*philo)
-	{
-		temp = (*philo)->next;
-		free(*philo);
-		*philo = temp;
-	}
-	*philo = NULL;
 }
 
 long long	ft_get_time(void)

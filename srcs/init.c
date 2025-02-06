@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 17:24:40 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 07:34:19 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_philo	*init_philo(t_data *data, t_fork *fork)
 	temp = NULL;
 	while (i < data->philo_nbr)
 	{
-		philo->even = i % 2;
 		temp = ft_lstnew(i, data, fork);
 		ft_lstadd_back(&philo, temp);
 		i++;

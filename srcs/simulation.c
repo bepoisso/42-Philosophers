@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 17:25:46 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 08:08:54 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*philo_routine(void *var)
 	if (philo->even)
 	{
 		philo_think(philo);
-		usleep(philo->data->time_to_eat * 1000);
+		usleep(philo->data->time_to_eat);
 	}
 	while (philo->state != dead && philo->data->end == false)
 	{
@@ -89,7 +89,6 @@ void	*dead_monitoring(void *var)
 	{
 		if ((ft_get_time() - philo->data->start_time) - philo->last_meal_time >= philo->data->time_to_die)
 		{
-			printf("DEAD PHILO\n");
 			mutex(&philo->data->finish, lock);
 			philo->data->end = true;
 			mutex(&philo->data->finish, unlock);
@@ -111,7 +110,7 @@ void	*meals_monitoring(void *var)
 	while (check == false)
 	{
 		current = philo->next;
-		while (current != philo) // a check si le premier est bien tester
+		while (current != philo)
 		{
 			if (philo->meal_count < philo->data->max_meals)
 			{
@@ -140,10 +139,10 @@ void	simulation(t_data *data, t_philo *philo)
 	pthread_t	meals;
 
 	current = philo;
+	data->start_time = ft_get_time();
 	thread(&dead, dead_monitoring, (void *)philo, create);
 	if (data->max_meals != -1)
 		thread(&meals, meals_monitoring, (void *)philo, create);
-	data->start_time = ft_get_time();
 	thread(&current->thread_id, philo_routine, (void *)current, create);
 	current = current->next;
 	while (current != philo)
@@ -152,7 +151,10 @@ void	simulation(t_data *data, t_philo *philo)
 		current = current->next;
 	}
 	current = philo;
+	thread(&dead, NULL, NULL, join);
 	thread(&current->thread_id, NULL, NULL, join);
+	if (data->max_meals != -1)
+		thread(&meals, NULL, NULL, join);
 	current = current->next;
 	while (current != philo)
 	{

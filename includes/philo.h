@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/04 17:32:59 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 07:50:22 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ void		parser(t_data *data, int ac, char **av);
 // UTILES
 unsigned long long	ft_atoll(const char *nptr);
 void				ft_perror(char *s);
-void				free_philo(t_philo **philo);
-void				free_fork(t_fork *fork, int nbr);
 long long			ft_get_time(void);
 int					is_not_correct(char *s);
 void				ft_print(char *s, t_philo *philo);
@@ -138,3 +136,7 @@ void				simulation(t_data *data, t_philo *philo);
 // MUTEX & THREAD HANDLE
 void				mutex(t_mutex *mutex, t_mutex_code code);
 void				thread(pthread_t *thread, void *(*func)(void *), void *data, t_thread_code code);
+
+// CLEAN
+void				clean_fork(t_fork *fork);
+void				free_philo(t_philo **philo);

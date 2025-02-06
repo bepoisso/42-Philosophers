@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/01/30 14:23:46 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/02/06 08:06:08 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RESET = \033[0m
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
-ARGS = 3 300 200 200
+ARGS = 11 800 200 200 10
 VALARGS = --leak-check=full --track-origins=yes --show-leak-kinds=all #--trace-children=yes --track-fds=yes
 MAKEFLAGS += --no-print-directory
 
