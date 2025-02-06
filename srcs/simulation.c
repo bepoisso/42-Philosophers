@@ -6,11 +6,28 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/06 08:08:54 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:44:10 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	check_max_meals(t_philo *philo)
+{
+	t_philo	*current;
+
+	current = philo->next;
+	while (current != philo)
+	{
+		if (current->meal_count < current->data->max_meals)
+			return (0);
+		current = current->next;
+	}
+	mutex(&philo->data->finish, lock);
+	philo->data->end = true;
+	mutex(&philo->data->finish, unlock);
+	return (1);
+}
 
 void	philo_sleep(t_philo *philo)
 {
@@ -30,14 +47,8 @@ void	philo_think(t_philo *philo)
 void	philo_eat(t_philo *philo)
 {
 	mutex(&philo->right_fork->fork, lock);
-	if (philo->data->end == true)
-		return ;
 	ft_print(GRE"has taken a fork"RES, philo);
-	if (philo->data->end == true)
-		return ;
 	mutex(&philo->left_fork->fork, lock);
-	if (philo->data->end == true)
-		return ;
 	ft_print(GRE"has taken a fork"RES, philo);
 	ft_print(YEL"is eating"RES, philo);
 	philo->last_meal_time = ft_get_time() - philo->data->start_time;
@@ -89,45 +100,13 @@ void	*dead_monitoring(void *var)
 	{
 		if ((ft_get_time() - philo->data->start_time) - philo->last_meal_time >= philo->data->time_to_die)
 		{
+			philo_dead(philo);
 			mutex(&philo->data->finish, lock);
 			philo->data->end = true;
 			mutex(&philo->data->finish, unlock);
-			philo_dead(philo);
 			break ;
 		}
 		philo = philo->next;
-	}
-	return (NULL);
-}
-
-void	*meals_monitoring(void *var)
-{
-	t_philo	*philo;
-	t_philo	*current;
-	bool	check;
-	check = false;
-	philo = (t_philo *)var;
-	while (check == false)
-	{
-		current = philo->next;
-		while (current != philo)
-		{
-			if (philo->meal_count < philo->data->max_meals)
-			{
-				check = false;
-				break ;
-			}
-			else if (philo->meal_count >= philo->data->max_meals)
-				check = true;
-			current = current->next;
-		}
-		current = current->next;
-	}
-	if (check == true)
-	{
-		mutex(&philo->data->finish, lock);
-		philo->data->end = true;
-		mutex(&philo->data->finish, unlock);
 	}
 	return (NULL);
 }
@@ -136,13 +115,10 @@ void	simulation(t_data *data, t_philo *philo)
 {
 	t_philo		*current;
 	pthread_t	dead;
-	pthread_t	meals;
 
 	current = philo;
 	data->start_time = ft_get_time();
 	thread(&dead, dead_monitoring, (void *)philo, create);
-	if (data->max_meals != -1)
-		thread(&meals, meals_monitoring, (void *)philo, create);
 	thread(&current->thread_id, philo_routine, (void *)current, create);
 	current = current->next;
 	while (current != philo)
@@ -153,8 +129,6 @@ void	simulation(t_data *data, t_philo *philo)
 	current = philo;
 	thread(&dead, NULL, NULL, join);
 	thread(&current->thread_id, NULL, NULL, join);
-	if (data->max_meals != -1)
-		thread(&meals, NULL, NULL, join);
 	current = current->next;
 	while (current != philo)
 	{

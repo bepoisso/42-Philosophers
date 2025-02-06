@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:26:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/06 07:34:43 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:36:48 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_philo	*ft_lstnew(int content, t_data *data, t_fork *fork)
 	memset(new, 0, sizeof(t_philo));
 	new->id = content;
 	new->state = thinking;
+	new->meal_count = 0;
+	mutex(&new->meals, init);
 	new->next = NULL;
 	new->data = data;
 	new->right_fork = &fork[(content - 1 + data->philo_nbr) % data->philo_nbr];
