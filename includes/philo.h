@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/06 11:33:14 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:08:54 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ struct s_data
 	long long	time_to_eat;
 	long long	time_to_sleep;
 	long long	max_meals;
+	int			nbr_meals;
 	long long	start_time;
 	bool		end;
 	t_mutex		write;
