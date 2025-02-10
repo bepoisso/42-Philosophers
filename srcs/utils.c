@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:44:41 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:46:32 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,31 @@ int is_not_correct(char *s)
 
 void	ft_print(char *s, t_philo *philo)
 {
-	if (philo->data->end)
-		return;
 	mutex(&philo->data->write, lock);
+	mutex(&philo->data->finish, lock);
+	if (philo->data->end)
+		return (mutex(&philo->data->write, unlock), mutex(&philo->data->finish, unlock));
+	mutex(&philo->data->finish, unlock);
 	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id + 1, s);
 	mutex(&philo->data->write, unlock);
+}
+
+void	ft_sleep(unsigned long long time)
+{
+	unsigned long long now;
+
+	now = ft_get_time();
+	while (ft_get_time() - now < time)
+	{
+		usleep(50);
+	}
+}
+
+int	is_ended(t_data *data)
+{
+	mutex(&data->finish, lock);
+	if (data->end == true)
+		return (mutex(&data->finish, unlock), 1);
+	mutex(&data->finish, unlock);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:12:48 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/06 07:34:19 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:58:51 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_data(t_data *data)
 {
 	data->end = false;
 	mutex(&data->write, init);
-	mutex(&data->dead, init);
 	mutex(&data->meals, init);
 	mutex(&data->finish, init);
 }
