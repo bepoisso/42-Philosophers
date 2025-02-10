@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 17:01:47 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:47:52 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	*philo_routine(void *var)
 		philo_think(philo);
 		ft_sleep(philo->data->time_to_eat * 1000);
 	}
+	else
+		philo_think(philo);
 	while (1)
 	{
 		if (is_ended(philo->data))
@@ -127,17 +129,22 @@ void	simulation(t_data *data, t_philo *philo)
 	t_philo		*current;
 	pthread_t	mon;
 
-	philo->prev->next = NULL;
+	int i = 0;
+	// philo->prev->next = NULL;
 	current = philo;
 	data->start_time = ft_get_time();
 	thread(&mon, monitoring, philo, create);
+	// current->prev->next = NULL;
+	//printf("%p", current->prev->next);
 	while (current)
 	{
+		//printf("%d\n", current->id);
 		thread(&current->thread_id, philo_routine, current, create);
 		current = current->next;
+		i++;
 	}
 	current = philo;
-	philo->prev->next = NULL;
+	// philo->prev->next = NULL;
 	thread(&mon, NULL, NULL, join);
 	while (current)
 	{
