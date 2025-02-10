@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 13:12:57 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:01:47 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_sleep(t_philo *philo)
 {
 	ft_print(BLU"is sleeping"RES, philo);
 	philo->state = sleeping;
-	ft_sleep(philo->data->time_to_sleep);
+	ft_sleep(philo->data->time_to_sleep * 1000);
 }
 
 void	philo_think(t_philo *philo)
@@ -42,7 +42,7 @@ void	philo_eat(t_philo *philo)
 	mutex(&philo->meals, unlock);
 	ft_print(YEL"is eating"RES, philo);
 	philo->state = eating;
-	ft_sleep(philo->data->time_to_eat);
+	ft_sleep(philo->data->time_to_eat * 1000);
 	mutex(&philo->meals, lock);
 	philo->meal_count++;
 	philo->last_meal_time = ft_get_time();
@@ -61,7 +61,7 @@ void	philo_dead(t_philo *philo)
 
 int	check_dead(t_philo *philo)
 {
-	if (((ft_get_time() - philo->data->start_time) - philo->last_meal_time >= philo->data->time_to_die))
+	if (ft_get_time() - philo->last_meal_time >= philo->data->time_to_die)
 		return (1);
 	return (0);
 }
@@ -82,7 +82,7 @@ void	*philo_routine(void *var)
 	if (philo->even)
 	{
 		philo_think(philo);
-		ft_sleep(philo->data->time_to_eat);
+		ft_sleep(philo->data->time_to_eat * 1000);
 	}
 	while (1)
 	{
@@ -129,8 +129,8 @@ void	simulation(t_data *data, t_philo *philo)
 
 	philo->prev->next = NULL;
 	current = philo;
-	thread(&mon, monitoring, philo, create);
 	data->start_time = ft_get_time();
+	thread(&mon, monitoring, philo, create);
 	while (current)
 	{
 		thread(&current->thread_id, philo_routine, current, create);
