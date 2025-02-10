@@ -6,11 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/10 12:46:32 by bepoisso         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/06 16:44:41 by bepoisso         ###   ########.fr       */
->>>>>>> f2931cf (fix monitoring)
+/*   Updated: 2025/02/10 18:06:03 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,34 +65,9 @@ int is_not_correct(char *s)
 
 void	ft_print(char *s, t_philo *philo)
 {
-	mutex(&philo->data->write, lock);
-<<<<<<< HEAD
-	mutex(&philo->data->finish, lock);
 	if (philo->data->end)
-		return (mutex(&philo->data->write, unlock), mutex(&philo->data->finish, unlock));
-	mutex(&philo->data->finish, unlock);
-=======
->>>>>>> f2931cf (fix monitoring)
+		return;
+	mutex(&philo->data->write, lock);
 	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id + 1, s);
 	mutex(&philo->data->write, unlock);
-}
-
-void	ft_sleep(unsigned long long time)
-{
-	unsigned long long now;
-
-	now = ft_get_time();
-	while (ft_get_time() - now < time)
-	{
-		usleep(50);
-	}
-}
-
-int	is_ended(t_data *data)
-{
-	mutex(&data->finish, lock);
-	if (data->end == true)
-		return (mutex(&data->finish, unlock), 1);
-	mutex(&data->finish, unlock);
-	return (0);
 }

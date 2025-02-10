@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:58:58 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:06:29 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ struct s_data
 	bool		end;
 	t_mutex		write;
 	t_mutex		meals;
+	t_mutex		dead;
 	t_mutex		finish;
 	t_fork		*forks;
 	t_philo		*philos;
@@ -118,8 +119,6 @@ void				ft_perror(char *s);
 long long			ft_get_time(void);
 int					is_not_correct(char *s);
 void				ft_print(char *s, t_philo *philo);
-void				ft_sleep(unsigned long long time);
-int					is_ended(t_data *data);
 
 // MANIPULATION
 t_philo				*ft_lstnew(int content, t_data *data, t_fork *fork);
