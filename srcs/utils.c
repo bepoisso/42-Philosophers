@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:44:54 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:09:27 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ long long	ft_get_time(void)
 	return (time.tv_sec * 1e3 + time.tv_usec / 1e3);
 }
 
-int is_not_correct(char *s)
+int	is_not_correct(char *s)
 {
 	int	i;
 
@@ -61,34 +61,4 @@ int is_not_correct(char *s)
 		return (1);
 	}
 	return (0);
-}
-
-void	ft_print(char *s, t_philo *philo)
-{
-	mutex(&philo->data->finish, lock);
-	if (philo->data->end)
-		return (mutex(&philo->data->finish, unlock));
-	mutex(&philo->data->finish, unlock);
-	mutex(&philo->data->write, lock);
-	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id + 1, s);
-	mutex(&philo->data->write, unlock);
-}
-
-void	alone(t_data *data)
-{
-	data->end = true;
-	printf("0 1 "GRE"as taken a fork\n");
-	usleep(data->time_to_die);
-	printf(RES"%lld 1"RED" died\n"RES, data->time_to_die);
-}
-
-void	ft_sleep(unsigned long long time)
-{
-	unsigned long long now;
-
-	now = ft_get_time();
-	while (ft_get_time() - now < time)
-	{
-		usleep(50);
-	}
 }

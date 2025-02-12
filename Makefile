@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/02/12 13:59:34 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/02/12 14:27:03 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRC_FILES = \
 			clean.c\
 			mutex_handle.c\
 			thread_handle.c\
+			philo_routine.c\
+			philo_utils.c\
 
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

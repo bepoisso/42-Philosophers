@@ -6,20 +6,22 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:21:27 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:26:07 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHILO_H
+# define PHILO_H
 // _______________________INCLUDES_______________________
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <limits.h>
-#include <stdbool.h>
-#include <errno.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <errno.h>
 
 # define RED "\x1b[31m"
 # define GRE "\x1b[32m"
@@ -31,7 +33,7 @@
 // _______________________STRUCT & VARIABLE_______________________
 
 // TYPEDEF
-typedef int	t_state;
+typedef int				t_state;
 typedef pthread_mutex_t	t_mutex;
 typedef struct s_data	t_data;
 
@@ -89,7 +91,7 @@ enum e_state
 };
 
 // mutex_CODE
-typedef	enum e_mutex_code
+typedef enum e_mutex_code
 {
 	init,
 	destroy,
@@ -108,10 +110,10 @@ typedef enum e_thread_code
 //	_______________________FUNCTIONS_______________________
 
 // PHILO
-void		philo(t_data *data);
+void				philo(t_data *data);
 
 // PARSER
-void		parser(t_data *data, int ac, char **av);
+void				parser(t_data *data, int ac, char **av);
 
 // UTILES
 unsigned long long	ft_atoll(const char *nptr);
@@ -121,6 +123,9 @@ int					is_not_correct(char *s);
 void				ft_print(char *s, t_philo *philo);
 void				alone(t_data *data);
 void				ft_sleep(unsigned long long time);
+void				take_a_fork(t_philo *philo, t_mutex *fork);
+void				upgrade_time(t_philo *philo);
+void				*monitoring(void *var);
 
 // MANIPULATION
 t_philo				*ft_lstnew(int content, t_data *data, t_fork *fork);
@@ -137,10 +142,20 @@ void				init_data(t_data *data);
 void				*philo_routine(void *var);
 void				simulation(t_data *data, t_philo *philo);
 
+// PHILO ROUTUNE
+void				philo_dead(t_philo *philo);
+void				philo_sleep(t_philo *philo);
+void				philo_think(t_philo *philo);
+void				philo_eat(t_philo *philo);
+void				*philo_routine(void *var);
+
 // MUTEX & THREAD HANDLE
 void				mutex(t_mutex *mutex, t_mutex_code code);
-void				thread(pthread_t *thread, void *(*func)(void *), void *data, t_thread_code code);
+void				thread(pthread_t *thread, void *(*func)(void *),
+						void *data, t_thread_code code);
 
 // CLEAN
 void				clean_fork(t_fork *fork);
 void				free_philo(t_philo **philo);
+
+#endif

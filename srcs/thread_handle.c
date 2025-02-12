@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:25:19 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:58:40 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:07:38 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,22 @@ static void	thread_error(int status, t_thread_code code)
 	if (status == EAGAIN)
 		ft_perror("Error Thread\nNo recources to create another thread.\n");
 	else if (status == EPERM)
-		ft_perror ("Error Thread\nThe caller does not have apropriate permission.\n");
+		ft_perror ("Error Thread\nThe caller does not have apropriate \
+			permission.\n");
 	else if (status == EINVAL && (code == join || code == detach))
 		ft_perror("Error Thread\nThe value specified by thread is invalid.\n");
 	else if (status == EINVAL && code == create)
 		ft_perror("Error Thread\nThe value specified by attr is invalid.\n");
-	else if (status == EDEADLK || status ==  EDEADLOCK)
-		ft_perror("Error Thread\nA deadlock was detected or the value of thread specifies the calling thread.\n");
+	else if (status == EDEADLK || status == EDEADLOCK)
+		ft_perror("Error Thread\nA deadlock was detected or the value of \
+			thread specifies the calling thread.\n");
 	else if (status == ESRCH)
-		ft_perror("Error Thread\nNo thread could be found corresponding to that specified by the given tread ID, thread.\n");
+		ft_perror("Error Thread\nNo thread could be found corresponding to \
+			that specified by the given tread ID, thread.\n");
 }
 
-void	thread(pthread_t *thread, void *(*func)(void *), void *data, t_thread_code code)
+void	thread(pthread_t *thread, void *(*func)(void *),
+			void *data, t_thread_code code)
 {
 	if (code == create)
 		thread_error(pthread_create(thread, NULL, func, data), code);
