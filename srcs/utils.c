@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:03 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:12:39 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ int is_not_correct(char *s)
 
 void	ft_print(char *s, t_philo *philo)
 {
+	mutex(&philo->data->finish, lock);
 	if (philo->data->end)
-		return;
+		return (mutex(&philo->data->finish, unlock));
+	mutex(&philo->data->finish, unlock);
 	mutex(&philo->data->write, lock);
 	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id + 1, s);
 	mutex(&philo->data->write, unlock);
