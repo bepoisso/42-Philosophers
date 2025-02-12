@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:20 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/30 16:10:50 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:54:24 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // ./philo nbr_philo time_to_die time_to_eat time_to_sleep [max_meals]
 void	parser(t_data *data, int ac, char **av)
 {
-	if (is_not_correct(av[1]))
+	if (is_not_correct(av[1]) || ft_atoll(av[1]) > 500)
 		ft_perror("Error\nNbr of philosophers is not correct\n");
 	data->philo_nbr = ft_atoll(av[1]);
 	if (is_not_correct(av[2]))

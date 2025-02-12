@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:27:42 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:51:27 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ void	philo_eat(t_philo *philo)
 	take_a_fork(philo, &philo->left_fork->fork);
 	take_a_fork(philo, &philo->right_fork->fork);
 	ft_print(YEL"is eating"RES, philo);
-	// upgrade_time(philo);
-	ft_sleep(philo->data->time_to_eat);
 	upgrade_time(philo);
+	ft_sleep(philo->data->time_to_eat);
 	mutex(&philo->left_fork->fork, unlock);
 	mutex(&philo->right_fork->fork, unlock);
 	mutex(&philo->meals, lock);
@@ -146,13 +145,13 @@ void	simulation(t_data *data, t_philo *philo)
 		current = current->next;
 	}
 	// TESTER
-	current = philo;
-	printf("Philo : %d eat : %d time\n", current->id, current->meal_count);
-	current = current->next;
-	while (current != philo)
-	{
-		printf("Philo : %d eat : %d time\n", current->id, current->meal_count);
-		current = current->next;
-	}
-	// TESTER
+	// current = philo;
+	// printf("Philo : %d eat : %d time\n", current->id, current->meal_count);
+	// current = current->next;
+	// while (current != philo)
+	// {
+	// 	printf("Philo : %d eat : %d time\n", current->id, current->meal_count);
+	// 	current = current->next;
+	// }
+	// // TESTER
 }
