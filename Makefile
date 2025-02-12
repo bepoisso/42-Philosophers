@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 18:53:14 by bepoisso          #+#    #+#              #
-#    Updated: 2025/02/12 12:59:36 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/02/12 13:37:37 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RESET = \033[0m
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g -I$(INC_DIR)
 ARGS = 10 8000 200 200 3
 VALARGS = --leak-check=full --track-origins=yes --show-leak-kinds=all #--trace-children=yes --track-fds=yes
 MAKEFLAGS += --no-print-directory
@@ -76,7 +76,7 @@ val:
 		valgrind $(VALARGS) ./$(NAME) $(ARGS)
 
 hel: re
-		valgrind --tool=helgrind  ./$(NAME) $(ARGS)
+		valgrind --tool=helgrind --history-level=none  ./$(NAME) $(ARGS)
 
 exec:
 		./$(NAME) $(ARGS)

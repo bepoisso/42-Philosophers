@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:33:31 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:03:59 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:27:42 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_sleep(t_philo *philo)
 {
 	ft_print(BLU"is sleeping"RES, philo);
 	philo->state = sleeping;
-	usleep(philo->data->time_to_sleep * 1000);
+	ft_sleep(philo->data->time_to_sleep);
 }
 
 void	philo_think(t_philo *philo)
@@ -44,8 +44,8 @@ void	philo_eat(t_philo *philo)
 	take_a_fork(philo, &philo->left_fork->fork);
 	take_a_fork(philo, &philo->right_fork->fork);
 	ft_print(YEL"is eating"RES, philo);
-	upgrade_time(philo);
-	usleep(philo->data->time_to_eat * 1000);
+	// upgrade_time(philo);
+	ft_sleep(philo->data->time_to_eat);
 	upgrade_time(philo);
 	mutex(&philo->left_fork->fork, unlock);
 	mutex(&philo->right_fork->fork, unlock);
@@ -73,7 +73,7 @@ void	*philo_routine(void *var)
 	if (philo->even)
 	{
 		philo_think(philo);
-		usleep(philo->data->time_to_eat);
+		ft_sleep(philo->data->time_to_eat);
 	}
 	mutex(&philo->data->finish, lock);
 	while (philo->data->end == false)

@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:56:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:29 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:21:27 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void				ft_perror(char *s);
 long long			ft_get_time(void);
 int					is_not_correct(char *s);
 void				ft_print(char *s, t_philo *philo);
+void				alone(t_data *data);
+void				ft_sleep(unsigned long long time);
 
 // MANIPULATION
 t_philo				*ft_lstnew(int content, t_data *data, t_fork *fork);

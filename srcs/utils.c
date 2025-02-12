@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:41:22 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/02/12 11:12:39 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:23:12 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,23 @@ void	ft_print(char *s, t_philo *philo)
 	mutex(&philo->data->write, lock);
 	printf("%lld %d  %s\n", (ft_get_time() - philo->data->start_time), philo->id + 1, s);
 	mutex(&philo->data->write, unlock);
+}
+
+void	alone(t_data *data)
+{
+	data->end = true;
+	printf("0 1 "GRE"as taken a fork\n");
+	usleep(data->time_to_die);
+	printf(RES"%lld 1"RED" died\n"RES, data->time_to_die);
+}
+
+void	ft_sleep(unsigned long long time)
+{
+	unsigned long long now;
+
+	now = ft_get_time();
+	while (ft_get_time() - now < time)
+	{
+		usleep(50);
+	}
 }
