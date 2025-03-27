@@ -8,7 +8,7 @@ Philosophers is a project that challenges you to solve the famous "Dining Philos
 
 ## Status
 <div align="center">
-  <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/philosophers_success.png"  />
+  <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/philosopher_success.png"  />
 </div>
 
 ## Objectives
