@@ -11,6 +11,11 @@ Philosophers is a project that challenges you to solve the famous "Dining Philos
   <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/philosopher_success.png"  />
 </div>
 
+## Exemple
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/philo_exp.gif"  />
+</div>
+
 ## Objectives
 
 The goal of this project is to simulate a scenario where a group of philosophers alternates between eating, thinking, and sleeping. They must share a limited number of forks without causing a deadlock or data race. The project introduces you to multithreading and thread synchronization mechanisms.
